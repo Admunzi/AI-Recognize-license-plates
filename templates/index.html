@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<header>
+	<div class="overlay">
+        <h1>Plate Recognition</h1>
+        <h2>Daniel Ayala Cantador</h2>
+        <h3>That app is a plate recognition app, it can recognize the plate of a car and the brand of the car</h3>
+        <div class="container_github">
+            <a href="https://github.com/Admunzi">
+                <span>My Github</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<body>
+    <div class="container-form-upload">
+        <h1>Sube una o más imágenes para reconocer matriculas</h1>
+
+        <form action="/process" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" multiple required>
+
+            <input type="submit" value="Subir">
+        </form>
+    </div>
+
+    <div class="mosaic_images">
+        {% if list_images %}
+            <h1>Matriculas reconocidas</h1>
+            <div class="grid-wrapper">
+                {% for image in list_images %}
+                    {% set plate_data = plate_info.pop() %}
+                    <div>
+                        <img src="./static/uploads/{{ image }}" alt="Car plate" />
+                        <p>
+                            <strong>Matricula: </strong> {{ plate_data["plate"]["plate"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }} <br>
+                            <strong>Modelo: </strong> {{ plate_data["make"]["name"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }}<br>
+                            <strong>Color: </strong> {{ plate_data["color"]["name"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }}
+
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
