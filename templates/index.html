@@ -24,28 +24,27 @@
 
 <body>
     <div class="container-form-upload">
-        <h1>Sube una o más imágenes para reconocer matriculas</h1>
+        <h1>Upload one or more images</h1>
 
         <form action="/process" method="post" enctype="multipart/form-data">
             <input type="file" name="image" accept="image/*" multiple required>
 
-            <input type="submit" value="Subir">
+            <input type="submit" value="Upload">
         </form>
     </div>
 
     <div class="mosaic_images">
         {% if list_images %}
-            <h1>Matriculas reconocidas</h1>
+            <h1>Recognized plates</h1>
             <div class="grid-wrapper">
                 {% for image in list_images %}
                     {% set plate_data = plate_info.pop() %}
                     <div>
                         <img src="./static/uploads/{{ image }}" alt="Car plate" />
                         <p>
-                            <strong>Matricula: </strong> {{ plate_data["plate"]["plate"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }} <br>
-                            <strong>Modelo: </strong> {{ plate_data["make"]["name"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }}<br>
+                            <strong>Plate: </strong> {{ plate_data["plate"]["plate"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }} <br>
+                            <strong>Brand: </strong> {{ plate_data["make"]["name"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }}<br>
                             <strong>Color: </strong> {{ plate_data["color"]["name"] }}, <strong>confidence: </strong> {{ plate_data["plate"]["confidence"] }}
-
                         </p>
                     </div>
                 {% endfor %}
