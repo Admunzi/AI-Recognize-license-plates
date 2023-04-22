@@ -14,3 +14,6 @@ We use [Openalpr](https://www.openalpr.com/) API for recognizing license plates 
 - Enjoy
 
 ## Video Demo
+
+https://user-images.githubusercontent.com/72613258/233777340-860569ff-125a-47b5-a0d3-5c55c52ac7c1.mp4
+
